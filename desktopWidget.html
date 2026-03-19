@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Jarvis's Workshop</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --bg-primary: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0f2847 100%);
@@ -45,459 +41,89 @@
             transition: all 0.3s;
         }
         
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 20px; }
         
-        .hero {
-            text-align: center;
-            padding: 30px 0;
-        }
+        .hero { text-align: center; padding: 30px 0; }
+        .hero-subtitle { font-size: 1em; color: var(--accent-purple); margin-bottom: 8px; letter-spacing: 2px; text-transform: uppercase; }
+        h1 { font-size: 2.5em; margin-bottom: 10px; background: linear-gradient(90deg, var(--text-accent), var(--accent-green), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .typing-text { font-size: 1.1em; color: var(--accent-green); min-height: 30px; }
+        .cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent-green); margin-left: 3px; animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
         
-        .hero-subtitle {
-            font-size: 1em;
-            color: var(--accent-purple);
-            margin-bottom: 8px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .hero-status { display: flex; gap: 15px; justify-content: center; margin-top: 15px; flex-wrap: wrap; }
+        .status-badge { display: flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--bg-widget); border-radius: 15px; font-size: 0.85em; border: 1px solid var(--border-color); }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); }
         
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--text-accent), var(--accent-green), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+        .control-btn { background: var(--bg-widget); border: 1px solid var(--border-color); color: var(--text-primary); padding: 8px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85em; transition: all 0.3s; }
+        .control-btn:hover { background: rgba(255,255,255,0.1); }
+        .control-btn.active { background: rgba(0,217,255,0.3); border-color: var(--text-accent); }
         
-        .typing-text {
-            font-size: 1.1em;
-            color: var(--accent-green);
-            min-height: 30px;
-        }
+        .search-area { margin-bottom: 20px; }
+        .search-box { display: flex; gap: 10px; }
+        .search-input { flex: 1; background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px 15px; color: var(--text-primary); font-size: 1em; }
+        .search-input::placeholder { color: var(--text-secondary); }
+        .search-btn { background: linear-gradient(135deg, var(--text-accent), var(--accent-purple)); border: none; color: #fff; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
         
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1em;
-            background: var(--accent-green);
-            margin-left: 3px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .widget { background: var(--bg-widget); border-radius: 16px; padding: 20px; border: 1px solid var(--border-color); }
+        .widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .widget-title { font-size: 1.1em; color: var(--text-accent); }
+        .widget-btn { background: rgba(0,217,255,0.2); border: none; color: var(--text-accent); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85em; }
         
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
+        .clock-display { text-align: center; font-size: 3em; font-family: 'Courier New', monospace; color: var(--accent-green); }
+        .clock-date { text-align: center; color: var(--text-secondary); font-size: 1em; margin-top: 8px; }
         
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+        .weather-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .weather-main { text-align: center; padding: 15px; background: rgba(255,217,61,0.1); border-radius: 12px; }
+        .weather-icon { font-size: 2.5em; margin-bottom: 5px; }
+        .weather-temp { font-size: 2em; color: var(--accent-yellow); }
+        .weather-city { color: var(--text-secondary); font-size: 0.9em; margin-top: 3px; }
+        .weather-info { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+        .weather-detail { background: rgba(0,217,255,0.1); padding: 10px; border-radius: 8px; text-align: center; }
+        .weather-detail-value { font-size: 1.2em; color: var(--text-accent); }
+        .weather-detail-label { font-size: 0.75em; color: var(--text-secondary); margin-top: 3px; }
         
-        .hero-status {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
+        .news-section { grid-column: span 2; }
+        .news-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+        .news-tab { background: rgba(255,255,255,0.1); border: none; color: var(--text-secondary); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85em; }
+        .news-tab.active { background: rgba(0,217,255,0.3); color: var(--text-primary); }
+        .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .news-card { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 12px; cursor: pointer; transition: all 0.2s; }
+        .news-card:hover { background: rgba(255,255,255,0.1); }
+        .news-card-title { font-size: 0.9em; color: var(--text-primary); line-height: 1.4; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-card-meta { display: flex; justify-content: space-between; font-size: 0.75em; color: var(--text-secondary); }
+        .news-card-link { display: inline-block; margin-top: 8px; padding: 4px 8px; background: rgba(0,217,255,0.2); border-radius: 4px; font-size: 0.75em; color: var(--text-accent); }
+        .news-refresh-btn { display: block; width: 100%; margin-top: 12px; padding: 10px; background: linear-gradient(135deg, var(--text-accent), var(--accent-green)); border: none; border-radius: 8px; color: #fff; font-size: 0.9em; font-weight: bold; cursor: pointer; }
+        .news-loading { text-align: center; padding: 30px; color: var(--text-secondary); grid-column: span 3; }
         
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: var(--bg-widget);
-            border-radius: 15px;
-            font-size: 0.85em;
-            border: 1px solid var(--border-color);
-        }
+        .todo-input-area { display: flex; gap: 8px; margin-bottom: 12px; }
+        .todo-input { flex: 1; background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.9em; }
+        .todo-input::placeholder { color: var(--text-secondary); }
+        .todo-add-btn { background: var(--accent-green); border: none; color: #1a1a2e; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .todo-list { max-height: 200px; overflow-y: auto; }
+        .todo-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid var(--border-color); gap: 8px; }
+        .todo-text { flex: 1; color: var(--text-primary); font-size: 0.9em; }
+        .todo-text.done { text-decoration: line-through; color: var(--text-secondary); }
+        .todo-delete { background: none; border: none; color: var(--accent-red); cursor: pointer; font-size: 1em; }
         
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent-green);
-        }
+        .counter-section { text-align: center; }
+        .big-counter { font-size: 3.5em; color: var(--accent-red); font-weight: bold; }
+        .counter-controls { margin-top: 15px; }
+        .counter-btn { background: rgba(255,107,107,0.2); border: none; color: var(--accent-red); padding: 8px 15px; border-radius: 8px; cursor: pointer; margin: 0 3px; }
         
-        .theme-toggle {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .theme-btn {
-            background: var(--bg-widget);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: all 0.3s;
-        }
-        
-        .search-area {
-            margin-bottom: 20px;
-        }
-        
-        .search-box {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .search-input {
-            flex: 1;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px 15px;
-            color: var(--text-primary);
-            font-size: 1em;
-        }
-        
-        .search-input::placeholder {
-            color: var(--text-secondary);
-        }
-        
-        .search-btn {
-            background: linear-gradient(135deg, var(--text-accent), var(--accent-purple));
-            border: none;
-            color: #fff;
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .widget {
-            background: var(--bg-widget);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .widget-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .widget-title {
-            font-size: 1.1em;
-            color: var(--text-accent);
-        }
-        
-        .widget-btn {
-            background: rgba(0,217,255,0.2);
-            border: none;
-            color: var(--text-accent);
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.85em;
-        }
-        
-        .clock-display {
-            text-align: center;
-            font-size: 3em;
-            font-family: 'Courier New', monospace;
-            color: var(--accent-green);
-        }
-        
-        .clock-date {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1em;
-            margin-top: 8px;
-        }
-        
-        .weather-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        
-        .weather-main {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255,217,61,0.1);
-            border-radius: 12px;
-        }
-        
-        .weather-icon {
-            font-size: 2.5em;
-            margin-bottom: 5px;
-        }
-        
-        .weather-temp {
-            font-size: 2em;
-            color: var(--accent-yellow);
-        }
-        
-        .weather-city {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            margin-top: 3px;
-        }
-        
-        .weather-info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .weather-detail {
-            background: rgba(0,217,255,0.1);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        .weather-detail-value {
-            font-size: 1.2em;
-            color: var(--text-accent);
-        }
-        
-        .weather-detail-label {
-            font-size: 0.75em;
-            color: var(--text-secondary);
-            margin-top: 3px;
-        }
-        
-        .news-section {
-            grid-column: span 2;
-        }
-        
-        .news-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .news-tab {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: var(--text-secondary);
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85em;
-        }
-        
-        .news-tab.active {
-            background: rgba(0,217,255,0.3);
-            color: var(--text-primary);
-        }
-        
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-        
-        .news-card {
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .news-card:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        
-        .news-card-title {
-            font-size: 0.9em;
-            color: var(--text-primary);
-            line-height: 1.4;
-            margin-bottom: 8px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .news-card-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75em;
-            color: var(--text-secondary);
-        }
-        
-        .news-card-link {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 4px 8px;
-            background: rgba(0,217,255,0.2);
-            border-radius: 4px;
-            font-size: 0.75em;
-            color: var(--text-accent);
-        }
-        
-        .news-refresh-btn {
-            display: block;
-            width: 100%;
-            margin-top: 12px;
-            padding: 10px;
-            background: linear-gradient(135deg, var(--text-accent), var(--accent-green));
-            border: none;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 0.9em;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .news-loading {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-secondary);
-            grid-column: span 3;
-        }
-        
-        .todo-input-area {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .todo-input {
-            flex: 1;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px;
-            color: var(--text-primary);
-            font-size: 0.9em;
-        }
-        
-        .todo-input::placeholder {
-            color: var(--text-secondary);
-        }
-        
-        .todo-add-btn {
-            background: var(--accent-green);
-            border: none;
-            color: #1a1a2e;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        
-        .todo-list {
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        
-        .todo-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid var(--border-color);
-            gap: 8px;
-        }
-        
-        .todo-text {
-            flex: 1;
-            color: var(--text-primary);
-            font-size: 0.9em;
-        }
-        
-        .todo-text.done {
-            text-decoration: line-through;
-            color: var(--text-secondary);
-        }
-        
-        .todo-delete {
-            background: none;
-            border: none;
-            color: var(--accent-red);
-            cursor: pointer;
-            font-size: 1em;
-        }
-        
-        .counter-section {
-            text-align: center;
-        }
-        
-        .big-counter {
-            font-size: 3.5em;
-            color: var(--accent-red);
-            font-weight: bold;
-        }
-        
-        .counter-controls {
-            margin-top: 15px;
-        }
-        
-        .counter-btn {
-            background: rgba(255,107,107,0.2);
-            border: none;
-            color: var(--accent-red);
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 0 3px;
-        }
-        
-        .status-bar {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            padding: 15px;
-            background: var(--bg-widget);
-            border-radius: 12px;
-            margin-top: 20px;
-            border: 1px solid var(--border-color);
-        }
-        
-        .status-item {
-            text-align: center;
-        }
-        
-        .status-value {
-            font-size: 1.5em;
-            color: var(--accent-green);
-        }
-        
-        .status-label {
-            font-size: 0.75em;
-            color: var(--text-secondary);
-            margin-top: 3px;
-        }
-        
-        .pulse-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            margin-left: 5px;
-        }
+        .status-bar { display: flex; justify-content: center; gap: 30px; padding: 15px; background: var(--bg-widget); border-radius: 12px; margin-top: 20px; border: 1px solid var(--border-color); }
+        .status-item { text-align: center; }
+        .status-value { font-size: 1.5em; color: var(--accent-green); }
+        .status-label { font-size: 0.75em; color: var(--text-secondary); margin-top: 3px; }
+        .pulse-dot { display: inline-block; width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; margin-left: 5px; }
         
         @media (max-width: 900px) {
             .main-grid { grid-template-columns: 1fr; }
             .news-section { grid-column: span 1; }
             .news-grid { grid-template-columns: 1fr; }
             .news-loading { grid-column: span 1; }
-            .header { flex-direction: column; gap: 10px; }
             h1 { font-size: 1.8em; }
         }
         
@@ -509,37 +135,36 @@
 <body>
     <div class="container">
         <div class="hero">
-            <p class="hero-subtitle">Powered by Jarvis AI</p>
+            <p class="hero-subtitle" data-i18n="subtitle">Powered by Jarvis AI</p>
             <h1>Welcome to Jarvis's Workshop</h1>
-            <div class="typing-text">
-                <span id="typing"></span><span class="cursor"></span>
-            </div>
+            <div class="typing-text"><span id="typing"></span><span class="cursor"></span></div>
             <div class="hero-status">
-                <div class="status-badge"><span class="status-dot"></span><span>System Online</span></div>
+                <div class="status-badge"><span class="status-dot"></span><span data-i18n="status1">System Online</span></div>
                 <div class="status-badge"><span class="status-dot"></span><span>MiniMax M2.7</span></div>
-                <div class="status-badge"><span class="status-dot"></span><span>OpenClaw Ready</span></div>
+                <div class="status-badge"><span class="status-dot"></span><span data-i18n="status2">OpenClaw Ready</span></div>
             </div>
         </div>
         
         <div class="header">
-            <div></div>
-            <div class="theme-toggle">
-                <button class="theme-btn" onclick="setTheme('dark')">Dark</button>
-                <button class="theme-btn" onclick="setTheme('light')">Light</button>
+            <div class="controls">
+                <button class="control-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="control-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+                <button class="control-btn" onclick="setTheme('dark')">Dark</button>
+                <button class="control-btn" onclick="setTheme('light')">Light</button>
             </div>
         </div>
         
         <div class="search-area">
             <div class="search-box">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search anything..." onkeypress="if(event.key==='Enter') openSearch()">
-                <button class="search-btn" onclick="openSearch()">Search</button>
+                <input type="text" class="search-input" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search anything..." onkeypress="if(event.key==='Enter') openSearch()">
+                <button class="search-btn" onclick="openSearch()" data-i18n="search">Search</button>
             </div>
         </div>
         
         <div class="main-grid">
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-title">Clock</span>
+                    <span class="widget-title" data-i18n="clock">Clock</span>
                 </div>
                 <div class="clock-display" id="clock">00:00:00</div>
                 <div class="clock-date" id="date">2026-03-19</div>
@@ -547,8 +172,8 @@
             
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-title">Weather</span>
-                    <button class="widget-btn" onclick="refreshWeather()">Refresh</button>
+                    <span class="widget-title" data-i18n="weather">Weather</span>
+                    <button class="widget-btn" onclick="refreshWeather()" data-i18n="refresh">Refresh</button>
                 </div>
                 <div class="weather-grid">
                     <div class="weather-main">
@@ -559,11 +184,11 @@
                     <div class="weather-info">
                         <div class="weather-detail">
                             <div class="weather-detail-value" id="weatherHumidity">--%</div>
-                            <div class="weather-detail-label">Humidity</div>
+                            <div class="weather-detail-label" data-i18n="humidity">Humidity</div>
                         </div>
                         <div class="weather-detail">
                             <div class="weather-detail-value" id="weatherWind">-- km/h</div>
-                            <div class="weather-detail-label">Wind</div>
+                            <div class="weather-detail-label" data-i18n="wind">Wind</div>
                         </div>
                     </div>
                 </div>
@@ -571,34 +196,32 @@
             
             <div class="widget news-section">
                 <div class="widget-header">
-                    <span class="widget-title">Latest News</span>
-                    <div>
-                        <button class="news-tab active" onclick="switchNewsTab('world')">World</button>
-                        <button class="news-tab" onclick="switchNewsTab('china')">China</button>
-                        <button class="news-tab" onclick="switchNewsTab('tech')">Tech</button>
+                    <span class="widget-title" data-i18n="news">Latest News</span>
+                    <div class="news-tabs">
+                        <button class="news-tab active" data-i18n="world" onclick="switchNewsTab('world')">World</button>
+                        <button class="news-tab" data-i18n="china" onclick="switchNewsTab('china')">China</button>
+                        <button class="news-tab" data-i18n="tech" onclick="switchNewsTab('tech')">Tech</button>
                     </div>
                 </div>
-                <div class="news-grid" id="newsGrid">
-                    <div class="news-loading">Loading...</div>
-                </div>
-                <button class="news-refresh-btn" onclick="loadNews()">Refresh News</button>
+                <div class="news-grid" id="newsGrid"><div class="news-loading">Loading...</div></div>
+                <button class="news-refresh-btn" onclick="loadNews()" data-i18n="refreshNews">Refresh News</button>
             </div>
             
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-title">Todo List</span>
+                    <span class="widget-title" data-i18n="todo">Todo List</span>
                 </div>
                 <div class="todo-input-area">
-                    <input type="text" class="todo-input" id="todoInput" placeholder="Add new task..." onkeypress="if(event.key==='Enter') addTodo()">
-                    <button class="todo-add-btn" onclick="addTodo()">Add</button>
+                    <input type="text" class="todo-input" id="todoInput" data-i18n-placeholder="addTaskPlaceholder" placeholder="Add new task..." onkeypress="if(event.key==='Enter') addTodo()">
+                    <button class="todo-add-btn" onclick="addTodo()" data-i18n="add">Add</button>
                 </div>
                 <div class="todo-list" id="todoList"></div>
             </div>
             
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-title">Counter</span>
-                    <button class="widget-btn" onclick="resetCounter()">Reset</button>
+                    <span class="widget-title" data-i18n="counter">Counter</span>
+                    <button class="widget-btn" onclick="resetCounter()" data-i18n="reset">Reset</button>
                 </div>
                 <div class="counter-section">
                     <div class="big-counter" id="bigCounter">0</div>
@@ -615,7 +238,7 @@
         <div class="status-bar">
             <div class="status-item">
                 <div class="status-value" id="uptime">0:00:00<span class="pulse-dot"></span></div>
-                <div class="status-label">Uptime</div>
+                <div class="status-label" data-i18n="uptime">Uptime</div>
             </div>
             <div class="status-item">
                 <div class="status-value" id="fps">60</div>
@@ -623,52 +246,114 @@
             </div>
             <div class="status-item">
                 <div class="status-value">1</div>
-                <div class="status-label">Visitors</div>
+                <div class="status-label" data-i18n="visitors">Visitors</div>
             </div>
         </div>
     </div>
     
     <script>
-        // Typing effect - simplified
-        const phrases = ["Hello, I'm Jarvis!", "Your AI assistant", "How can I help?", "Ready 24/7"];
-        let phraseIndex = 0, charIndex = 0, isDeleting = false;
+        // Translations
+        const i18n = {
+            en: {
+                subtitle: 'Powered by Jarvis AI',
+                status1: 'System Online',
+                status2: 'OpenClaw Ready',
+                search: 'Search',
+                searchPlaceholder: 'Search anything...',
+                clock: 'Clock',
+                weather: 'Weather',
+                refresh: 'Refresh',
+                humidity: 'Humidity',
+                wind: 'Wind',
+                news: 'Latest News',
+                world: 'World',
+                china: 'China',
+                tech: 'Tech',
+                refreshNews: 'Refresh News',
+                todo: 'Todo List',
+                addTaskPlaceholder: 'Add new task...',
+                add: 'Add',
+                counter: 'Counter',
+                reset: 'Reset',
+                uptime: 'Uptime',
+                visitors: 'Visitors',
+                noTasks: 'No tasks yet'
+            },
+            zh: {
+                subtitle: 'Jarvis AI 驱动',
+                status1: '系统在线',
+                status2: 'OpenClaw 就绪',
+                search: '搜索',
+                searchPlaceholder: '搜索任何内容...',
+                clock: '时钟',
+                weather: '天气',
+                refresh: '刷新',
+                humidity: '湿度',
+                wind: '风速',
+                news: '最新新闻',
+                world: '世界',
+                china: '中国',
+                tech: '科技',
+                refreshNews: '换一批',
+                todo: '待办事项',
+                addTaskPlaceholder: '添加新任务...',
+                add: '添加',
+                counter: '计数器',
+                reset: '重置',
+                uptime: '运行时间',
+                visitors: '在线用户',
+                noTasks: '暂无待办'
+            }
+        };
         
-        function typeEffect() {
-            const el = document.getElementById('typing');
-            const current = phrases[phraseIndex];
-            if (isDeleting) {
-                el.textContent = current.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                el.textContent = current.substring(0, charIndex + 1);
-                charIndex++;
-            }
-            let speed = isDeleting ? 30 : 80;
-            if (!isDeleting && charIndex === current.length) {
-                speed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                speed = 500;
-            }
-            setTimeout(typeEffect, speed);
+        let currentLang = localStorage.getItem('jarvisLang') || 'en';
+        
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('jarvisLang', lang);
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang][key]) el.textContent = i18n[lang][key];
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (i18n[lang][key]) el.placeholder = i18n[lang][key];
+            });
+            document.querySelectorAll('.control-btn[data-lang]').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+            loadNews();
+            renderTodos();
         }
-        typeEffect();
         
         // Theme
         function setTheme(theme) {
             document.body.setAttribute('data-theme', theme);
             localStorage.setItem('jarvisTheme', theme);
         }
-        const savedTheme = localStorage.getItem('jarvisTheme') || 'dark';
-        document.body.setAttribute('data-theme', savedTheme);
+        setTheme(localStorage.getItem('jarvisTheme') || 'dark');
+        
+        // Typing
+        const phrases = { en: ["Hello, I'm Jarvis!", "Your AI assistant", "How can I help?", "Ready 24/7"], zh: ["你好，我是 Jarvis!", "你的 AI 助手", "有什么需要帮忙的?", "24小时待命"] };
+        let phraseIndex = 0, charIndex = 0, isDeleting = false;
+        
+        function typeEffect() {
+            const el = document.getElementById('typing');
+            const current = phrases[currentLang][phraseIndex];
+            if (isDeleting) { el.textContent = current.substring(0, charIndex - 1); charIndex--; }
+            else { el.textContent = current.substring(0, charIndex + 1); charIndex++; }
+            let speed = isDeleting ? 30 : 80;
+            if (!isDeleting && charIndex === current.length) { speed = 2000; isDeleting = true; }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases[currentLang].length; speed = 500; }
+            setTimeout(typeEffect, speed);
+        }
+        typeEffect();
         
         // Clock
         function updateClock() {
             const now = new Date();
             document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', {hour12: false});
-            document.getElementById('date').textContent = now.toLocaleDateString('en-US');
+            document.getElementById('date').textContent = now.toLocaleDateString(currentLang === 'zh' ? 'zh-CN' : 'en-US');
         }
         setInterval(updateClock, 1000);
         updateClock();
@@ -729,10 +414,7 @@
                 grid.innerHTML = shuffled.map(news => `
                     <div class="news-card" onclick="window.open('${news.link}', '_blank')">
                         <div class="news-card-title">${news.title}</div>
-                        <div class="news-card-meta">
-                            <span>${news.source}</span>
-                            <span>Just now</span>
-                        </div>
+                        <div class="news-card-meta"><span>${news.source}</span><span>Just now</span></div>
                     </div>
                 `).join('');
             }, 300);
@@ -752,7 +434,7 @@
         function renderTodos() {
             const list = document.getElementById('todoList');
             if (todos.length === 0) {
-                list.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:0.9em;">No tasks yet</div>';
+                list.innerHTML = `<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:0.9em;">${i18n[currentLang].noTasks}</div>`;
                 return;
             }
             list.innerHTML = todos.map((t, i) => `
@@ -767,25 +449,11 @@
         function addTodo() {
             const input = document.getElementById('todoInput');
             const text = input.value.trim();
-            if (text) {
-                todos.push({ text, done: false });
-                localStorage.setItem('jarvisTodos', JSON.stringify(todos));
-                renderTodos();
-                input.value = '';
-            }
+            if (text) { todos.push({ text, done: false }); localStorage.setItem('jarvisTodos', JSON.stringify(todos)); renderTodos(); input.value = ''; }
         }
         
-        function toggleTodo(i) {
-            todos[i].done = !todos[i].done;
-            localStorage.setItem('jarvisTodos', JSON.stringify(todos));
-            renderTodos();
-        }
-        
-        function deleteTodo(i) {
-            todos.splice(i, 1);
-            localStorage.setItem('jarvisTodos', JSON.stringify(todos));
-            renderTodos();
-        }
+        function toggleTodo(i) { todos[i].done = !todos[i].done; localStorage.setItem('jarvisTodos', JSON.stringify(todos)); renderTodos(); }
+        function deleteTodo(i) { todos.splice(i, 1); localStorage.setItem('jarvisTodos', JSON.stringify(todos)); renderTodos(); }
         renderTodos();
         
         // Counter
@@ -800,7 +468,7 @@
             if (q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
         }
         
-        // Uptime - optimized
+        // Uptime
         const startTime = Date.now();
         setInterval(() => {
             const e = Date.now() - startTime;
@@ -810,18 +478,17 @@
             document.getElementById('uptime').innerHTML = `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}<span class="pulse-dot"></span>`;
         }, 1000);
         
-        // FPS - simplified
+        // FPS
         let frames = 0, lastTime = performance.now();
         function calculateFPS() {
             frames++;
-            if (performance.now() - lastTime >= 1000) {
-                document.getElementById('fps').textContent = frames;
-                frames = 0;
-                lastTime = performance.now();
-            }
+            if (performance.now() - lastTime >= 1000) { document.getElementById('fps').textContent = frames; frames = 0; lastTime = performance.now(); }
             requestAnimationFrame(calculateFPS);
         }
         calculateFPS();
+        
+        // Init
+        setLang(currentLang);
     </script>
 </body>
 </html>
