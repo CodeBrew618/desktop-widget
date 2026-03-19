@@ -14,7 +14,6 @@
         :root {
             --bg-primary: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0f2847 100%);
             --bg-widget: rgba(255,255,255,0.05);
-            --bg-widget-hover: rgba(255,255,255,0.08);
             --text-primary: #fff;
             --text-secondary: #888;
             --text-accent: #00d9ff;
@@ -28,7 +27,6 @@
         [data-theme="light"] {
             --bg-primary: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 50%, #d0d5dc 100%);
             --bg-widget: rgba(255,255,255,0.85);
-            --bg-widget-hover: rgba(255,255,255,0.95);
             --text-primary: #1a1a2e;
             --text-secondary: #666;
             --text-accent: #0284c7;
@@ -47,83 +45,45 @@
             transition: all 0.3s;
         }
         
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            animation: float 15s infinite;
-            opacity: 0.3;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh); opacity: 0; }
-            10% { opacity: 0.3; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-100vh); opacity: 0; }
-        }
-        
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 30px 20px;
-            position: relative;
-            z-index: 1;
         }
         
         .hero {
             text-align: center;
-            padding: 40px 0;
+            padding: 30px 0;
         }
         
         .hero-subtitle {
-            font-size: 1.2em;
+            font-size: 1em;
             color: var(--accent-purple);
-            margin-bottom: 10px;
-            letter-spacing: 3px;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
         
         h1 {
-            font-size: 3em;
-            margin-bottom: 15px;
+            font-size: 2.5em;
+            margin-bottom: 10px;
             background: linear-gradient(90deg, var(--text-accent), var(--accent-green), var(--accent-purple));
-            background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
         
         .typing-text {
-            font-size: 1.3em;
+            font-size: 1.1em;
             color: var(--accent-green);
-            margin-top: 15px;
-            min-height: 40px;
+            min-height: 30px;
         }
         
         .cursor {
             display: inline-block;
-            width: 3px;
-            height: 1.2em;
+            width: 2px;
+            height: 1em;
             background: var(--accent-green);
-            margin-left: 5px;
+            margin-left: 3px;
             animation: blink 1s infinite;
             vertical-align: middle;
         }
@@ -137,58 +97,49 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         
         .hero-status {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
         
         .status-badge {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
+            gap: 6px;
+            padding: 6px 12px;
             background: var(--bg-widget);
-            border-radius: 20px;
-            font-size: 0.9em;
+            border-radius: 15px;
+            font-size: 0.85em;
             border: 1px solid var(--border-color);
         }
         
         .status-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--accent-green);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(0,255,136,0); }
         }
         
         .theme-toggle {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
         
         .theme-btn {
             background: var(--bg-widget);
             border: 1px solid var(--border-color);
             color: var(--text-primary);
-            padding: 10px 15px;
-            border-radius: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 0.9em;
             transition: all 0.3s;
-        }
-        
-        .theme-btn:hover {
-            transform: scale(1.1);
         }
         
         .search-area {
@@ -205,7 +156,7 @@
             background: rgba(255,255,255,0.1);
             border: 1px solid var(--border-color);
             border-radius: 10px;
-            padding: 15px;
+            padding: 12px 15px;
             color: var(--text-primary);
             font-size: 1em;
         }
@@ -218,7 +169,7 @@
             background: linear-gradient(135deg, var(--text-accent), var(--accent-purple));
             border: none;
             color: #fff;
-            padding: 15px 25px;
+            padding: 12px 20px;
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
@@ -233,118 +184,99 @@
         
         .widget {
             background: var(--bg-widget);
-            border-radius: 20px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s;
-        }
-        
-        .widget:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         
         .widget-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .widget-title {
-            font-size: 1.3em;
+            font-size: 1.1em;
             color: var(--text-accent);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .widget-icon {
-            font-size: 1.5em;
         }
         
         .widget-btn {
             background: rgba(0,217,255,0.2);
             border: none;
             color: var(--text-accent);
-            padding: 8px 16px;
-            border-radius: 10px;
+            padding: 6px 12px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .widget-btn:hover {
-            transform: scale(1.05);
+            font-size: 0.85em;
         }
         
         .clock-display {
             text-align: center;
-            font-size: 4em;
+            font-size: 3em;
             font-family: 'Courier New', monospace;
             color: var(--accent-green);
-            text-shadow: 0 0 30px var(--accent-green);
         }
         
         .clock-date {
             text-align: center;
             color: var(--text-secondary);
-            font-size: 1.2em;
-            margin-top: 10px;
+            font-size: 1em;
+            margin-top: 8px;
         }
         
         .weather-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 15px;
         }
         
         .weather-main {
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             background: rgba(255,217,61,0.1);
-            border-radius: 15px;
+            border-radius: 12px;
         }
         
         .weather-icon {
-            font-size: 4em;
-            margin-bottom: 10px;
+            font-size: 2.5em;
+            margin-bottom: 5px;
         }
         
         .weather-temp {
-            font-size: 3em;
+            font-size: 2em;
             color: var(--accent-yellow);
         }
         
         .weather-city {
             color: var(--text-secondary);
-            font-size: 1.1em;
-            margin-top: 5px;
+            font-size: 0.9em;
+            margin-top: 3px;
         }
         
         .weather-info {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
         }
         
         .weather-detail {
             background: rgba(0,217,255,0.1);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 8px;
             text-align: center;
         }
         
         .weather-detail-value {
-            font-size: 1.5em;
+            font-size: 1.2em;
             color: var(--text-accent);
         }
         
         .weather-detail-label {
-            font-size: 0.85em;
+            font-size: 0.75em;
             color: var(--text-secondary);
-            margin-top: 5px;
+            margin-top: 3px;
         }
         
         .news-section {
@@ -353,18 +285,18 @@
         
         .news-tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         
         .news-tab {
             background: rgba(255,255,255,0.1);
             border: none;
             color: var(--text-secondary);
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s;
+            font-size: 0.85em;
         }
         
         .news-tab.active {
@@ -375,28 +307,26 @@
         .news-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 12px;
         }
         
         .news-card {
             background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 10px;
+            padding: 12px;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 1px solid transparent;
+            transition: all 0.2s;
         }
         
         .news-card:hover {
-            border-color: var(--text-accent);
-            transform: translateY(-3px);
+            background: rgba(255,255,255,0.1);
         }
         
         .news-card-title {
-            font-size: 0.95em;
+            font-size: 0.9em;
             color: var(--text-primary);
             line-height: 1.4;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
@@ -406,64 +336,55 @@
         .news-card-meta {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-        }
-        
-        .news-card-source {
-            font-size: 0.75em;
-            color: var(--text-accent);
-        }
-        
-        .news-card-time {
             font-size: 0.75em;
             color: var(--text-secondary);
         }
         
         .news-card-link {
             display: inline-block;
-            margin-top: 10px;
-            padding: 6px 12px;
+            margin-top: 8px;
+            padding: 4px 8px;
             background: rgba(0,217,255,0.2);
-            border-radius: 6px;
-            font-size: 0.8em;
+            border-radius: 4px;
+            font-size: 0.75em;
             color: var(--text-accent);
         }
         
         .news-refresh-btn {
             display: block;
             width: 100%;
-            margin-top: 15px;
-            padding: 12px;
+            margin-top: 12px;
+            padding: 10px;
             background: linear-gradient(135deg, var(--text-accent), var(--accent-green));
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             color: #fff;
-            font-size: 1em;
+            font-size: 0.9em;
             font-weight: bold;
             cursor: pointer;
         }
         
         .news-loading {
             text-align: center;
-            padding: 40px;
+            padding: 30px;
             color: var(--text-secondary);
             grid-column: span 3;
         }
         
         .todo-input-area {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         
         .todo-input {
             flex: 1;
             background: rgba(255,255,255,0.1);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 8px;
+            padding: 10px;
             color: var(--text-primary);
-            font-size: 1em;
+            font-size: 0.9em;
         }
         
         .todo-input::placeholder {
@@ -474,34 +395,29 @@
             background: var(--accent-green);
             border: none;
             color: #1a1a2e;
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
         }
         
         .todo-list {
-            max-height: 250px;
+            max-height: 200px;
             overflow-y: auto;
         }
         
         .todo-item {
             display: flex;
             align-items: center;
-            padding: 12px;
+            padding: 10px;
             border-bottom: 1px solid var(--border-color);
-            gap: 10px;
-        }
-        
-        .todo-checkbox {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
+            gap: 8px;
         }
         
         .todo-text {
             flex: 1;
             color: var(--text-primary);
+            font-size: 0.9em;
         }
         
         .todo-text.done {
@@ -514,7 +430,7 @@
             border: none;
             color: var(--accent-red);
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 1em;
         }
         
         .counter-section {
@@ -522,37 +438,32 @@
         }
         
         .big-counter {
-            font-size: 5em;
+            font-size: 3.5em;
             color: var(--accent-red);
             font-weight: bold;
         }
         
         .counter-controls {
-            margin-top: 20px;
+            margin-top: 15px;
         }
         
         .counter-btn {
             background: rgba(255,107,107,0.2);
             border: none;
             color: var(--accent-red);
-            padding: 10px 25px;
-            border-radius: 10px;
+            padding: 8px 15px;
+            border-radius: 8px;
             cursor: pointer;
-            margin: 0 5px;
-            transition: all 0.3s;
-        }
-        
-        .counter-btn:hover {
-            transform: scale(1.1);
+            margin: 0 3px;
         }
         
         .status-bar {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            padding: 20px;
+            gap: 30px;
+            padding: 15px;
             background: var(--bg-widget);
-            border-radius: 15px;
+            border-radius: 12px;
             margin-top: 20px;
             border: 1px solid var(--border-color);
         }
@@ -562,24 +473,23 @@
         }
         
         .status-value {
-            font-size: 1.8em;
+            font-size: 1.5em;
             color: var(--accent-green);
         }
         
         .status-label {
-            font-size: 0.85em;
+            font-size: 0.75em;
             color: var(--text-secondary);
-            margin-top: 5px;
+            margin-top: 3px;
         }
         
         .pulse-dot {
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 6px;
+            height: 6px;
             background: var(--accent-green);
             border-radius: 50%;
-            margin-left: 10px;
-            animation: pulse 1s infinite;
+            margin-left: 5px;
         }
         
         @media (max-width: 900px) {
@@ -587,18 +497,16 @@
             .news-section { grid-column: span 1; }
             .news-grid { grid-template-columns: 1fr; }
             .news-loading { grid-column: span 1; }
-            .header { flex-direction: column; gap: 15px; }
-            h1 { font-size: 2em; }
+            .header { flex-direction: column; gap: 10px; }
+            h1 { font-size: 1.8em; }
         }
         
-        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: var(--border-color); border-radius: 3px; }
         ::-webkit-scrollbar-thumb { background: var(--text-accent); border-radius: 3px; }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
     <div class="container">
         <div class="hero">
             <p class="hero-subtitle">Powered by Jarvis AI</p>
@@ -616,8 +524,8 @@
         <div class="header">
             <div></div>
             <div class="theme-toggle">
-                <button class="theme-btn" onclick="setTheme('dark')" title="Dark">Dark</button>
-                <button class="theme-btn" onclick="setTheme('light')" title="Light">Light</button>
+                <button class="theme-btn" onclick="setTheme('dark')">Dark</button>
+                <button class="theme-btn" onclick="setTheme('light')">Light</button>
             </div>
         </div>
         
@@ -631,7 +539,7 @@
         <div class="main-grid">
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-title"><span class="widget-icon">🕐</span> Clock</span>
+                    <span class="widget-title">Clock</span>
                 </div>
                 <div class="clock-display" id="clock">00:00:00</div>
                 <div class="clock-date" id="date">2026-03-19</div>
@@ -639,7 +547,7 @@
             
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-title"><span class="widget-icon">🌤️</span> Weather</span>
+                    <span class="widget-title">Weather</span>
                     <button class="widget-btn" onclick="refreshWeather()">Refresh</button>
                 </div>
                 <div class="weather-grid">
@@ -663,11 +571,11 @@
             
             <div class="widget news-section">
                 <div class="widget-header">
-                    <span class="widget-title"><span class="widget-icon">📰</span> Latest News</span>
+                    <span class="widget-title">Latest News</span>
                     <div>
-                        <button class="widget-btn" onclick="switchNewsTab('world')">World</button>
-                        <button class="widget-btn" onclick="switchNewsTab('china')">China</button>
-                        <button class="widget-btn" onclick="switchNewsTab('tech')">Tech</button>
+                        <button class="news-tab active" onclick="switchNewsTab('world')">World</button>
+                        <button class="news-tab" onclick="switchNewsTab('china')">China</button>
+                        <button class="news-tab" onclick="switchNewsTab('tech')">Tech</button>
                     </div>
                 </div>
                 <div class="news-grid" id="newsGrid">
@@ -678,7 +586,7 @@
             
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-title"><span class="widget-icon">✅</span> Todo List</span>
+                    <span class="widget-title">Todo List</span>
                 </div>
                 <div class="todo-input-area">
                     <input type="text" class="todo-input" id="todoInput" placeholder="Add new task..." onkeypress="if(event.key==='Enter') addTodo()">
@@ -689,7 +597,7 @@
             
             <div class="widget">
                 <div class="widget-header">
-                    <span class="widget-title"><span class="widget-icon">🔢</span> Counter</span>
+                    <span class="widget-title">Counter</span>
                     <button class="widget-btn" onclick="resetCounter()">Reset</button>
                 </div>
                 <div class="counter-section">
@@ -714,29 +622,15 @@
                 <div class="status-label">FPS</div>
             </div>
             <div class="status-item">
-                <div class="status-value" id="visitors">1</div>
+                <div class="status-value">1</div>
                 <div class="status-label">Visitors</div>
             </div>
         </div>
     </div>
     
     <script>
-        // Particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 20; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                p.style.animationDelay = Math.random() * 10 + 's';
-                container.appendChild(p);
-            }
-        }
-        createParticles();
-        
-        // Typing effect
-        const phrases = ["Hello, I'm Jarvis!", "Your AI assistant", "How can I help?", "Ready 24/7", "Let's build something!"];
+        // Typing effect - simplified
+        const phrases = ["Hello, I'm Jarvis!", "Your AI assistant", "How can I help?", "Ready 24/7"];
         let phraseIndex = 0, charIndex = 0, isDeleting = false;
         
         function typeEffect() {
@@ -749,7 +643,7 @@
                 el.textContent = current.substring(0, charIndex + 1);
                 charIndex++;
             }
-            let speed = isDeleting ? 50 : 100;
+            let speed = isDeleting ? 30 : 80;
             if (!isDeleting && charIndex === current.length) {
                 speed = 2000;
                 isDeleting = true;
@@ -788,12 +682,6 @@
                 document.getElementById('weatherTemp').textContent = c.temp_C + '°C';
                 document.getElementById('weatherHumidity').textContent = c.humidity + '%';
                 document.getElementById('weatherWind').textContent = c.windspeedKmph + ' km/h';
-                const code = c.weatherCode;
-                let icon = '☀️';
-                if (code.includes('119') || code.includes('122')) icon = '☁️';
-                else if (code.includes('176') || code.includes('263')) icon = '🌧️';
-                else if (code.includes('200')) icon = '⛈️';
-                document.getElementById('weatherIcon').textContent = icon;
             } catch (e) {
                 document.getElementById('weatherTemp').textContent = '7°C';
                 document.getElementById('weatherHumidity').textContent = '75%';
@@ -801,12 +689,7 @@
             }
         }
         fetchWeather();
-        
-        function refreshWeather() {
-            document.getElementById('weatherIcon').style.opacity = '0.5';
-            fetchWeather();
-            setTimeout(() => document.getElementById('weatherIcon').style.opacity = '1', 300);
-        }
+        function refreshWeather() { fetchWeather(); }
         
         // News
         const NEWS_DATA = {
@@ -824,11 +707,11 @@
                 { title: 'Boao Forum opens, focusing on openness and cooperation', source: 'CCTV', link: 'https://news.cctv.com' },
                 { title: 'China signs new trade agreements with multiple countries', source: 'China Daily', link: 'http://www.chinadaily.com.cn' },
                 { title: 'Chinese tech innovation continues to advance', source: 'Sci Tech Daily', link: 'http://digitalpaper.stdaily.com' },
-                { title: 'Guangdong-HK-Macao Greater Bay Area makes new progress', source: 'Nanfang Daily', link: 'http://www.nfdaily.cn' }
+                { title: 'Greater Bay Area makes new progress', source: 'Nanfang Daily', link: 'http://www.nfdaily.cn' }
             ],
             tech: [
                 { title: 'AI models achieve breakthroughs in multiple fields', source: 'TechCrunch', link: 'https://techcrunch.com' },
-                { title: 'Global chip shortage gradually eases, production recovers', source: 'Wired', link: 'https://www.wired.com' },
+                { title: 'Global chip shortage gradually eases', source: 'Wired', link: 'https://www.wired.com' },
                 { title: 'Quantum computing takes major step toward practicality', source: 'MIT Tech', link: 'https://www.technologyreview.com' },
                 { title: 'EV sales continue to grow, market share expands', source: 'The Verge', link: 'https://www.theverge.com' },
                 { title: 'Cybersecurity threats increase, companies strengthen defenses', source: 'Ars Technica', link: 'https://arstechnica.com' },
@@ -847,17 +730,18 @@
                     <div class="news-card" onclick="window.open('${news.link}', '_blank')">
                         <div class="news-card-title">${news.title}</div>
                         <div class="news-card-meta">
-                            <span class="news-card-source">${news.source}</span>
-                            <span class="news-card-time">Just now</span>
+                            <span>${news.source}</span>
+                            <span>Just now</span>
                         </div>
-                        <span class="news-card-link">Read more →</span>
                     </div>
                 `).join('');
-            }, 500);
+            }, 300);
         }
         
         function switchNewsTab(tab) {
             currentTab = tab;
+            document.querySelectorAll('.news-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
             loadNews();
         }
         loadNews();
@@ -868,14 +752,14 @@
         function renderTodos() {
             const list = document.getElementById('todoList');
             if (todos.length === 0) {
-                list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-secondary);">No tasks yet</div>';
+                list.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text-secondary);font-size:0.9em;">No tasks yet</div>';
                 return;
             }
             list.innerHTML = todos.map((t, i) => `
                 <div class="todo-item">
-                    <input type="checkbox" class="todo-checkbox" ${t.done ? 'checked' : ''} onchange="toggleTodo(${i})">
+                    <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTodo(${i})">
                     <span class="todo-text ${t.done ? 'done' : ''}">${t.text}</span>
-                    <button class="todo-delete" onclick="deleteTodo(${i})">×</button>
+                    <button class="todo-delete" onclick="deleteTodo(${i})">x</button>
                 </div>
             `).join('');
         }
@@ -916,7 +800,7 @@
             if (q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
         }
         
-        // Uptime
+        // Uptime - optimized
         const startTime = Date.now();
         setInterval(() => {
             const e = Date.now() - startTime;
@@ -926,7 +810,7 @@
             document.getElementById('uptime').innerHTML = `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}<span class="pulse-dot"></span>`;
         }, 1000);
         
-        // FPS
+        // FPS - simplified
         let frames = 0, lastTime = performance.now();
         function calculateFPS() {
             frames++;
