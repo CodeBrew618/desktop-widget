@@ -96,7 +96,7 @@
             margin-top: 10px;
         }
         
-        /* 天气 - 使用静态示例 */
+        /* 天气 */
         .weather-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -205,6 +205,30 @@
             text-align: center;
             padding: 40px;
             color: #888;
+        }
+        
+        .news-refresh-btn {
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            border: none;
+            border-radius: 10px;
+            color: #1a1a2e;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .news-refresh-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .news-refresh-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         
         /* 待办 */
@@ -376,7 +400,6 @@
             50% { opacity: 0.3; }
         }
         
-        /* 响应式 */
         @media (max-width: 900px) {
             .main-grid {
                 grid-template-columns: 1fr;
@@ -386,7 +409,6 @@
             }
         }
         
-        /* 滚动条 */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -404,7 +426,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🤖 Jarvis 工具箱</h1>
+        <h1>🤖 Jarvis M2.7 工具箱</h1>
         <p class="subtitle">实用小工具 · 实时数据</p>
         
         <div class="search-area">
@@ -450,19 +472,17 @@
             </div>
             
             <!-- 新闻 -->
-            <div class="widget">
+            <div class="widget" style="grid-column: span 2;">
                 <div class="widget-header">
                     <span class="widget-title">📰 最新新闻</span>
-                    <button class="widget-btn" onclick="refreshNews()">刷新</button>
-                </div>
-                <div class="news-tabs">
-                    <button class="news-tab active" onclick="switchNewsTab('world')">世界</button>
-                    <button class="news-tab" onclick="switchNewsTab('china')">中国</button>
-                    <button class="news-tab" onclick="switchNewsTab('tech')">科技</button>
+                    <button class="widget-btn" onclick="switchNewsTab('world')">世界</button>
+                    <button class="widget-btn" onclick="switchNewsTab('china')">中国</button>
+                    <button class="widget-btn" onclick="switchNewsTab('tech')">科技</button>
                 </div>
                 <div class="news-list" id="newsList">
                     <div class="news-loading">加载中...</div>
                 </div>
+                <button class="news-refresh-btn" id="refreshBtn" onclick="refreshNews()">🔄 换一批</button>
             </div>
             
             <!-- 待办 -->
@@ -476,21 +496,21 @@
                 </div>
                 <div class="todo-list" id="todoList"></div>
             </div>
-        </div>
-        
-        <!-- 计数器 -->
-        <div class="widget">
-            <div class="widget-header">
-                <span class="widget-title">🔢 计数器</span>
-                <button class="widget-btn" onclick="resetCounter()">重置</button>
-            </div>
-            <div class="counter-section">
-                <div class="big-counter" id="bigCounter">0</div>
-                <div class="counter-controls">
-                    <button class="counter-btn" onclick="changeCounter(-10)">-10</button>
-                    <button class="counter-btn" onclick="changeCounter(-1)">-1</button>
-                    <button class="counter-btn" onclick="changeCounter(1)">+1</button>
-                    <button class="counter-btn" onclick="changeCounter(10)">+10</button>
+            
+            <!-- 计数器 -->
+            <div class="widget">
+                <div class="widget-header">
+                    <span class="widget-title">🔢 计数器</span>
+                    <button class="widget-btn" onclick="resetCounter()">重置</button>
+                </div>
+                <div class="counter-section">
+                    <div class="big-counter" id="bigCounter">0</div>
+                    <div class="counter-controls">
+                        <button class="counter-btn" onclick="changeCounter(-10)">-10</button>
+                        <button class="counter-btn" onclick="changeCounter(-1)">-1</button>
+                        <button class="counter-btn" onclick="changeCounter(1)">+1</button>
+                        <button class="counter-btn" onclick="changeCounter(10)">+10</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -526,24 +546,38 @@
         setInterval(updateClock, 1000);
         updateClock();
         
-        // ===== 天气 - 使用嵌入数据 =====
-        const weatherData = {
-            saskatoon: {
-                temp: '7°C',
-                icon: '🌤️',
-                humidity: '75%',
-                wind: '12 km/h',
-                condition: '多云'
+        // ===== 天气 =====
+        const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+        
+        async function fetchWeather() {
+            try {
+                const response = await fetch(CORS_PROXY + encodeURIComponent('https://wttr.in/Saskatoon?format=j1'));
+                const data = await response.json();
+                const current = data.current_condition[0];
+                
+                document.getElementById('weatherTemp').textContent = current.temp_C + '°C';
+                document.getElementById('weatherHumidity').textContent = current.humidity + '%';
+                document.getElementById('weatherWind').textContent = current.windspeedKmph + ' km/h';
+                
+                const weatherCode = current.weatherCode;
+                let icon = '☀️';
+                if (weatherCode.includes('119') || weatherCode.includes('122')) icon = '☁️';
+                else if (weatherCode.includes('143') || weatherCode.includes('248')) icon = '🌫️';
+                else if (weatherCode.includes('176') || weatherCode.includes('263') || weatherCode.includes('266')) icon = '🌧️';
+                else if (weatherCode.includes('182') || weatherCode.includes('185')) icon = '🌨️';
+                else if (weatherCode.includes('200')) icon = '⛈️';
+                
+                document.getElementById('weatherIcon').textContent = icon;
+            } catch (e) {
+                console.log('Weather fetch failed:', e);
             }
-        };
+        }
         
         function refreshWeather() {
-            // 模拟刷新动画
             const icon = document.getElementById('weatherIcon');
             icon.style.opacity = '0.5';
-            setTimeout(() => {
-                icon.style.opacity = '1';
-            }, 300);
+            fetchWeather();
+            setTimeout(() => icon.style.opacity = '1', 300);
         }
         
         function getWeatherIcon() {
@@ -555,60 +589,93 @@
         }
         
         document.getElementById('weatherIcon').textContent = getWeatherIcon();
+        fetchWeather();
         
-        // ===== 新闻 - 使用静态示例数据 =====
-        const newsData = {
-            world: [
-                { title: '伊朗局势持续紧张，G7呼吁各方保持克制', time: '2小时前', source: 'BBC中文' },
-                { title: '加拿大承诺向霍尔木兹海峡争议地区提供援助', time: '3小时前', source: 'CTV News' },
-                { title: '全球市场因中东局势动荡大幅下跌', time: '4小时前', source: 'CBC' },
-                { title: '特朗普与日本首相会面，讨论贸易协议', time: '5小时前', source: 'Reuters' },
-                { title: '卡塔尔LNG设施受损，全球能源市场受影响', time: '6小时前', source: 'Bloomberg' },
-                { title: '联合国安理会召开紧急会议讨论中东局势', time: '7小时前', source: 'CNN' },
-            ],
-            china: [
-                { title: '两会闭幕，各项政策决议获通过', time: '1小时前', source: '新华网' },
-                { title: '中国发布一季度经济数据，总体运行平稳', time: '2小时前', source: '人民网' },
-                { title: '中国在国际贸易谈判中取得新进展', time: '3小时前', source: '央视新闻' },
-                { title: '多地推出促进消费新举措', time: '4小时前', source: '中国日报' },
-                { title: '科技创新成为今年发展重点方向', time: '5小时前', source: '中新社' },
-            ],
-            tech: [
-                { title: 'AI模型发现22个Firefox浏览器安全漏洞', time: '1小时前', source: 'InfoQ' },
-                { title: 'QCon London: 摩根士丹利重新规划MCP时代的API项目', time: '2小时前', source: 'InfoQ' },
-                { title: '近40%加拿大青少年屏幕时间超标', time: '3小时前', source: 'Global News' },
-                { title: 'MiniMax发布M2.7新版本模型', time: '5小时前', source: '官方公告' },
-                { title: 'OpenClaw更新至2026.3.13版本', time: '6小时前', source: '官方公告' },
-            ]
+        // ===== 新闻 =====
+        const NEWS_FEEDS = {
+            world: 'https://feeds.bbci.co.uk/news/world/rss.xml',
+            china: 'https://feeds.bbci.co.uk/news/world/asia/rss.xml',
+            tech: 'https://feeds.bbci.co.uk/news/technology/rss.xml'
         };
         
         let currentNewsTab = 'world';
+        let currentStartIndex = 0;
+        const NEWS_PER_PAGE = 6;
+        
+        async function fetchNews(topic) {
+            const newsList = document.getElementById('newsList');
+            const refreshBtn = document.getElementById('refreshBtn');
+            
+            newsList.innerHTML = '<div class="news-loading">加载中...</div>';
+            refreshBtn.disabled = true;
+            
+            try {
+                const response = await fetch(CORS_PROXY + encodeURIComponent(NEWS_FEEDS[topic]));
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, 'text/xml');
+                const items = xml.querySelectorAll('item');
+                
+                const allNews = [];
+                items.forEach(item => {
+                    const title = item.querySelector('title')?.textContent || '';
+                    const link = item.querySelector('link')?.textContent || '';
+                    const pubDate = item.querySelector('pubDate')?.textContent;
+                    let timeAgo = '';
+                    if (pubDate) {
+                        const date = new Date(pubDate);
+                        timeAgo = getTimeAgo(date);
+                    }
+                    if (title && title.trim()) {
+                        allNews.push({ title, link, timeAgo });
+                    }
+                });
+                
+                // 随机选择起始位置
+                currentStartIndex = Math.floor(Math.random() * (allNews.length - NEWS_PER_PAGE));
+                const news = allNews.slice(currentStartIndex, currentStartIndex + NEWS_PER_PAGE);
+                
+                if (news.length === 0) {
+                    newsList.innerHTML = '<div class="news-loading">暂无新闻</div>';
+                    return;
+                }
+                
+                newsList.innerHTML = news.map(n => `
+                    <div class="news-item" onclick="window.open('${n.link}', '_blank')">
+                        <div class="news-title">${n.title}</div>
+                        <div class="news-meta">${n.timeAgo || 'BBC News'}</div>
+                    </div>
+                `).join('');
+                
+            } catch (e) {
+                console.log('News fetch failed:', e);
+                newsList.innerHTML = '<div class="news-loading">加载失败，请点击"换一批"重试</div>';
+            } finally {
+                refreshBtn.disabled = false;
+            }
+        }
+        
+        function getTimeAgo(date) {
+            if (isNaN(date.getTime())) return '';
+            const seconds = Math.floor((new Date() - date) / 1000);
+            if (seconds < 3600) return Math.floor(seconds / 60) + '分钟前';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + '小时前';
+            return Math.floor(seconds / 86400) + '天前';
+        }
         
         function switchNewsTab(tab) {
             currentNewsTab = tab;
-            document.querySelectorAll('.news-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            renderNews();
-        }
-        
-        function renderNews() {
-            const newsList = document.getElementById('newsList');
-            const news = newsData[currentNewsTab];
-            newsList.innerHTML = news.map(n => `
-                <div class="news-item">
-                    <div class="news-title">${n.title}</div>
-                    <div class="news-meta">${n.source} · ${n.time}</div>
-                </div>
-            `).join('');
+            document.querySelectorAll('.widget-btn').forEach(btn => {
+                if (btn.textContent === '世界' || btn.textContent === '中国' || btn.textContent === '科技') {
+                    btn.classList.remove('active');
+                }
+            });
+            fetchNews(tab);
         }
         
         function refreshNews() {
-            const newsList = document.getElementById('newsList');
-            newsList.innerHTML = '<div class="news-loading">刷新中...</div>';
-            setTimeout(renderNews, 500);
+            fetchNews(currentNewsTab);
         }
-        
-        renderNews();
         
         // ===== 待办 =====
         let todos = JSON.parse(localStorage.getItem('jarvisTodos') || '[]');
@@ -705,6 +772,9 @@
             requestAnimationFrame(calculateFPS);
         }
         calculateFPS();
+        
+        // ===== 初始化新闻 =====
+        fetchNews('world');
     </script>
 </body>
 </html>
